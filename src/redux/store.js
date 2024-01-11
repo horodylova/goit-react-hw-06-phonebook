@@ -1,16 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-
- const rootReducer = (state = {}, action) => {
-  switch (action.type) {
-   
-    default:
-      return state;
-  }
-};
+import clicksReducer from './clicksSlice';  
 
 export const store = configureStore({
   reducer: {
-
-    rootReducer, 
+    clicks: clicksReducer,  
   },
 });

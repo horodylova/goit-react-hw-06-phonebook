@@ -1,4 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { update } from '../redux/clicksSlice';
+
 export const App = () => {
+  const dispatch = useDispatch();
+  const numberOfClicks = useSelector(state => state.clicks)
   return (
     <div
       style={{
@@ -10,7 +15,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
+      <button type = 'button' onClick={() => dispatch(update())}>Number of clicks {numberOfClicks}</button>
     </div>
   );
 };
