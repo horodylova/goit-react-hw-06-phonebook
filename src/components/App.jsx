@@ -15,7 +15,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      <button type = 'button' onClick={() => dispatch(update())}>Number of clicks {numberOfClicks}</button>
+      <button type = 'button' onClick={() => dispatch(update(5))}>Number of clicks {numberOfClicks}</button>
     </div>
   );
 };
