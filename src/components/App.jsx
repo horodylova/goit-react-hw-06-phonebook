@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { update } from '../redux/clicksSlice';
+import { setCount } from '../redux/clicksSlice';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      <button type = 'button' onClick={() => dispatch(update(5))}>Number of clicks {numberOfClicks}</button>
+      <button type = 'button' onClick={() => dispatch(setCount(5))}>Number of clicks {numberOfClicks.count}</button>
     </div>
   );
 };

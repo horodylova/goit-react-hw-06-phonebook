@@ -11,7 +11,7 @@ export const clicksSlice = createSlice({
 });
 
 export const { update } = clicksSlice.actions;
-export default clicksSlice.reducer;
+
 
 export const persistClicksSlice = createSlice({
   name: 'persistClicks',
