@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setContacts, addContact, deleteContact, setFilter } from '../redux/contactsSlice';
+import { addContact, deleteContact, setFilter } from '../redux/contactsSlice';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
@@ -12,10 +12,7 @@ export const App = () => {
   const filter = useSelector((state) => state.contacts.filter);
 
   useEffect(() => {
-    const storedContacts = localStorage.getItem('contacts');
-    if (storedContacts) {
-      dispatch(setContacts(JSON.parse(storedContacts)));
-    }
+  
   }, [dispatch]);
 
   const addContactHandler = (contact) => {
@@ -31,16 +28,10 @@ export const App = () => {
     }
 
     dispatch(addContact(contact));
-
-    const newContacts = [...contacts, contact];
-    localStorage.setItem('contacts', JSON.stringify(newContacts));
   };
 
   const handleDeleteContact = (id) => {
     dispatch(deleteContact(id));
-
-    const newContacts = contacts.filter((contact) => contact.id !== id);
-    localStorage.setItem('contacts', JSON.stringify(newContacts));
   };
 
   const handleFilterChange = (value) => {
@@ -63,4 +54,6 @@ export const App = () => {
 };
 
 export default App;
+
+
 
