@@ -4,7 +4,7 @@ import { FilterLabel, FilterInput } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/contactsSlice';
 
-export const Filter = ({ value, onChange }) => {
+export const Filter = () => {
   const filter = useSelector((state) => state.contacts.filter);
   const dispatch = useDispatch();
 
@@ -23,9 +23,4 @@ export const Filter = ({ value, onChange }) => {
       />
     </FilterLabel>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
