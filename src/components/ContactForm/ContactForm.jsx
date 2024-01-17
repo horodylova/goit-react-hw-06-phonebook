@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 import { FormContainer, Label, Input, Button } from './ContactForm.styled';
 
 
 export const ContactForm = ({ addContact }) => {
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
+
+  const contacts = useSelector((state) => state.contacts.contacts);
+
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -18,8 +24,23 @@ export const ContactForm = ({ addContact }) => {
     setNumber('');
   };
 
+  const addContactHandler = (contact) => {
+    const isNameAlreadyExists = contacts.some(
+      (existingContact) => existingContact.name === contact.name
+    );
+
+    if (isNameAlreadyExists) {
+      alert(
+        'This name is already in the phonebook. Please choose a different name.'
+      );
+      return;
+    }
+
+    dispatch(addContact(contact));
+  };
+
   return (
-    <FormContainer onSubmit={handleFormSubmit}>
+    <FormContainer onSubmit={handleFormSubmit} addContact={addContactHandler}>
       <Label htmlFor="name">
         Name:
         <Input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
