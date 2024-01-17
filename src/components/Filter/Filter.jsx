@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FilterLabel, FilterInput } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/contactsSlice';
+import { setFilter } from 'store/contactsSlice';
 
 export const Filter = () => {
   const filter = useSelector((state) => state.contacts.filter);
