@@ -1,46 +1,34 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormContainer, Label, Input, Button } from './ContactForm.styled';
+import { addContact } from 'store/contactsSlice';
 
-
-export const ContactForm = ({ addContact }) => {
-
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-
   const contacts = useSelector((state) => state.contacts.contacts);
-
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
     const id = nanoid();
-    addContact({ id, name, number });
-
-    setName('');
-    setNumber('');
-  };
-
-  const addContactHandler = (contact) => {
     const isNameAlreadyExists = contacts.some(
-      (existingContact) => existingContact.name === contact.name
+      (existingContact) => existingContact.name === name
     );
 
     if (isNameAlreadyExists) {
-      alert(
-        'This name is already in the phonebook. Please choose a different name.'
-      );
-      return;
+      alert('This name is already in the phonebook. Please choose a different name.');
+    } else {
+      dispatch(addContact({ name, number, id }));
+      setName('');
+      setNumber('');
     }
-
-    dispatch(addContact(contact));
   };
 
   return (
-    <FormContainer onSubmit={handleFormSubmit} addContact={addContactHandler}>
+    <FormContainer onSubmit={handleFormSubmit}>
       <Label htmlFor="name">
         Name:
         <Input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
@@ -52,10 +40,8 @@ export const ContactForm = ({ addContact }) => {
       <Button type="submit">Add contact</Button>
     </FormContainer>
   );
-};
+}
 
-ContactForm.propTypes = {
-  addContact: PropTypes.func.isRequired,
-};
+
 
 
